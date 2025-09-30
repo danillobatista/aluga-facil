@@ -1,0 +1,45 @@
+package com.example.alugafacil.alugafacil.services;
+
+import com.example.alugafacil.alugafacil.exceptions.ObjectNotFoundException;
+import com.example.alugafacil.alugafacil.models.Imovel;
+import com.example.alugafacil.alugafacil.repositories.ImovelRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class ImovelService {
+
+    @Autowired
+    private ImovelRepository imovelRepository;
+
+    public Imovel findById(Integer id) {
+        Optional<Imovel> imovel = imovelRepository.findById(id);
+
+        if(imovel.isPresent()){
+            return imovel.get();
+        }
+        throw new ObjectNotFoundException("Imóvel não encontrada com o id: " + id);
+    }
+
+    public List<Imovel> findAll() {
+        return imovelRepository.findAll();
+    }
+
+    public Imovel save(Imovel imovel){
+        return imovelRepository.save(imovel);
+    }
+
+    public Imovel update(Imovel imovel) {
+        findById(imovel.getId()); //se não encontrar, já lançou exceção
+        return imovelRepository.save(imovel);
+    }
+
+    public void delete(Integer id) {
+        Imovel cat = findById(id);
+
+        imovelRepository.deleteById(id);
+    }
+}
