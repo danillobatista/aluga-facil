@@ -21,7 +21,7 @@ public class ImovelService {
         if(imovel.isPresent()){
             return imovel.get();
         }
-        throw new ObjectNotFoundException("Imóvel não encontrada com o id: " + id);
+        throw new ObjectNotFoundException("Imóvel não encontrado com o id: " + id);
     }
 
     public List<Imovel> findAll() {
@@ -38,7 +38,7 @@ public class ImovelService {
     }
 
     public void delete(Integer id) {
-        Imovel cat = findById(id);
+        Imovel imovel = findById(id);
 
         imovelRepository.deleteById(id);
     }

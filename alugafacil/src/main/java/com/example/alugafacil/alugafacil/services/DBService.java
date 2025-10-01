@@ -1,7 +1,9 @@
 package com.example.alugafacil.alugafacil.services;
 
 import com.example.alugafacil.alugafacil.models.Imovel;
+import com.example.alugafacil.alugafacil.models.Inquilino;
 import com.example.alugafacil.alugafacil.repositories.ImovelRepository;
+import com.example.alugafacil.alugafacil.repositories.InquilinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,9 @@ public class DBService {
 
     @Autowired
     private ImovelRepository imovelRepository;
+
+    @Autowired
+    private InquilinoRepository inquilinoRepository;
 
     public void instanciaDB(){
         Imovel imovel1 = new Imovel(
@@ -44,5 +49,45 @@ public class DBService {
         );
 
         imovelRepository.saveAll(Arrays.asList(imovel1, imovel2, imovel3, imovel4, imovel5));
+
+        // Inquilino 1: Nome Composto Comum
+        Inquilino inquilino1 = new Inquilino(
+                null, // id = null
+                "Ana Paula Souza",
+                "anapaula.souza@emailficticio.com.br"
+        );
+
+        Inquilino inquilino2 = new Inquilino(
+                null, // id = null
+                "João Silva",
+                "joao.silva@servidor.com"
+        );
+
+        Inquilino inquilino3 = new Inquilino(
+                null, // id = null
+                "Camila Oliveira Santos",
+                "camilasoliveira@provedor.com.br"
+        );
+
+        Inquilino inquilino4 = new Inquilino(
+                null, // id = null
+                "Carlos Alberto Pereira",
+                "calberto.pereira@empresa.com"
+        );
+
+        Inquilino inquilino5 = new Inquilino(
+                null, // id = null
+                "Mariana Gomes",
+                "mgomes92@mailteste.net"
+        );
+
+        Inquilino inquilino6 = new Inquilino(
+                null, // id = null
+                "Lucas Mendes",
+                "lucas.mendes.aluga@gmail.com"
+        );
+
+        inquilinoRepository.saveAll(Arrays.asList(inquilino1,inquilino2,inquilino3,inquilino4,inquilino5,inquilino6));
+
     }
 }
