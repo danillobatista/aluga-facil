@@ -13,23 +13,23 @@ import java.util.Objects;
 public class Imovel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String descricao;
     private String endereco;
 
     public Imovel() {}
 
-    public Imovel(Integer id, String descricao, String endereco) {
+    public Imovel(Long id, String descricao, String endereco) {
         this.id = id;
         this.descricao = descricao;
         this.endereco = endereco;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

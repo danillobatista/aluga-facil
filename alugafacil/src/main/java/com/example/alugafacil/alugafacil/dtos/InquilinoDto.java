@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 
 public class InquilinoDto {
 
-    private Integer id;
+    private Long id;
 
     @NotNull(message = "o campo NOME é obrigatório")
     @Length(min = 10, max = 200, message = "o campo NOME deve ter entre 10 e 200 caracteres")
@@ -17,17 +17,17 @@ public class InquilinoDto {
     public InquilinoDto() {
     }
 
-    public InquilinoDto(Integer id, String nome, String email) {
+    public InquilinoDto(Long id, String nome, String email) {
         this.id = id;
         this.nome = nome;
         this.email = email;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

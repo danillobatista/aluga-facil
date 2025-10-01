@@ -15,31 +15,11 @@ public class ImovelService {
     @Autowired
     private ImovelRepository imovelRepository;
 
-    public Imovel findById(Integer id) {
-        Optional<Imovel> imovel = imovelRepository.findById(id);
-
-        if(imovel.isPresent()){
-            return imovel.get();
-        }
-        throw new ObjectNotFoundException("Imóvel não encontrado com o id: " + id);
-    }
-
     public List<Imovel> findAll() {
         return imovelRepository.findAll();
     }
 
     public Imovel save(Imovel imovel){
         return imovelRepository.save(imovel);
-    }
-
-    public Imovel update(Imovel imovel) {
-        findById(imovel.getId()); //se não encontrar, já lançou exceção
-        return imovelRepository.save(imovel);
-    }
-
-    public void delete(Integer id) {
-        Imovel imovel = findById(id);
-
-        imovelRepository.deleteById(id);
     }
 }

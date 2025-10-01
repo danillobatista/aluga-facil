@@ -11,23 +11,23 @@ import java.util.Objects;
 public class Inquilino {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String nome;
-    private String email;
+    private String email; //TODO validar como email
 
     public Inquilino() {}
 
-    public Inquilino(Integer id, String nome, String email) {
+    public Inquilino(Long id, String nome, String email) {
         this.id = id;
         this.nome = nome;
         this.email = email;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
