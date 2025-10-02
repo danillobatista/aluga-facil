@@ -3,11 +3,9 @@ package com.example.alugafacil.alugafacil.models;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Objects;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Imovel {
@@ -17,7 +15,12 @@ public class Imovel {
     private String descricao;
     private String endereco;
 
-    public Imovel() {}
+    @OneToMany(mappedBy = "imovel")
+    private List<Aluguel> alugueis;
+
+    public Imovel() {
+        this.alugueis = new ArrayList<>();
+    }
 
     public Imovel(Long id, String descricao, String endereco) {
         this.id = id;
@@ -58,15 +61,13 @@ public class Imovel {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Imovel imovel = (Imovel) o;
-        return Objects.equals(id, imovel.id) && Objects.equals(descricao, imovel.descricao) && Objects.equals(endereco, imovel.endereco);
+    public List<Aluguel> getAlugueis() {
+        return alugueis;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, descricao, endereco);
+    public void setAlugueis(List<Aluguel> alugueis) {
+        this.alugueis = alugueis;
     }
+
+
 }

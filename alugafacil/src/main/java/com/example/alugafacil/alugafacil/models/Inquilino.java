@@ -1,10 +1,9 @@
 package com.example.alugafacil.alugafacil.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,7 +14,12 @@ public class Inquilino {
     private String nome;
     private String email; //TODO validar como email
 
-    public Inquilino() {}
+    @OneToMany(mappedBy = "inquilino")
+    private List<Aluguel> alugueis;
+
+    public Inquilino() {
+        this.alugueis = new ArrayList<>();
+    }
 
     public Inquilino(Long id, String nome, String email) {
         this.id = id;
@@ -47,20 +51,29 @@ public class Inquilino {
         this.email = email;
     }
 
+    public List<Aluguel> getAlugueis() {
+        return alugueis;
+    }
+
+    public void setAlugueis(List<Aluguel> alugueis) {
+        this.alugueis = alugueis;
+    }
+
     @Override
     public String toString() {
-        return "Imovel{" +
+        return "Inquilino{" +
                 "id=" + id +
-                ", descricao='" + nome + '\'' +
-                ", endereco='" + email + '\'' +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Inquilino imovel = (Inquilino) o;
-        return Objects.equals(id, imovel.id) && Objects.equals(nome, imovel.nome) && Objects.equals(email, imovel.email);
+        Inquilino inquilino = (Inquilino) o;
+        return id.equals(inquilino.id);
     }
 
     @Override
