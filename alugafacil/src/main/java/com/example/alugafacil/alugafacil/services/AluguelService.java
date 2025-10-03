@@ -1,5 +1,6 @@
 package com.example.alugafacil.alugafacil.services;
 
+import com.example.alugafacil.alugafacil.exceptions.ObjectNotFoundException;
 import com.example.alugafacil.alugafacil.models.Aluguel;
 import com.example.alugafacil.alugafacil.repositories.AluguelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,13 @@ public class AluguelService {
 
 
         return aluguelRepository.save(aluguel);
+    }
+
+    public void pagar(Long id) {
+        Aluguel aluguel = aluguelRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Aluguel não encontrado."));
+
+        aluguel.setPago();
+        aluguelRepository.save(aluguel);
     }
 }

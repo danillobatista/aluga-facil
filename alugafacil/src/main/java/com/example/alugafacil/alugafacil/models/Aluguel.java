@@ -87,4 +87,8 @@ public class Aluguel {
                 ", valor=" + valor +
                 '}';
     }
+
+    public void setPago() {
+        this.dataVencimento = this.dataVencimento.plusMonths(1);
+    }
 }

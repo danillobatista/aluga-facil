@@ -52,4 +52,11 @@ public class AluguelControllerImpl implements AluguelController {
 
         return ResponseEntity.created(location).body(modelMapper.map(aluguel, AluguelDto.class));
     }
+
+    @Override
+    @PatchMapping("/{id}/pagar")
+    public ResponseEntity<Void> pay(@PathVariable Long id) {
+        aluguelService.pagar(id);
+        return ResponseEntity.ok().build();
+    }
 }

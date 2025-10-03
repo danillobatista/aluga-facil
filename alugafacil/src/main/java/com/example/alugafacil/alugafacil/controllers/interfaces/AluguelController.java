@@ -8,4 +8,5 @@ import java.util.List;
 public interface AluguelController {
     public ResponseEntity<List<AluguelDto>> findAll();
     public ResponseEntity<AluguelDto> save(AluguelDto aluguelDto);
+    public ResponseEntity<Void> pay(Long id);
 }

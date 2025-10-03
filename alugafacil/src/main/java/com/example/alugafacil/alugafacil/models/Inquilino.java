@@ -12,7 +12,7 @@ public class Inquilino {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private String email; //TODO validar como email
+    private String email;
 
     @OneToMany(mappedBy = "inquilino")
     private List<Aluguel> alugueis;
