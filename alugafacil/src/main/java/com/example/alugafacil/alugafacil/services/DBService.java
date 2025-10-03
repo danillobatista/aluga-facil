@@ -1,12 +1,15 @@
 package com.example.alugafacil.alugafacil.services;
 
+import com.example.alugafacil.alugafacil.models.Aluguel;
 import com.example.alugafacil.alugafacil.models.Imovel;
 import com.example.alugafacil.alugafacil.models.Inquilino;
+import com.example.alugafacil.alugafacil.repositories.AluguelRepository;
 import com.example.alugafacil.alugafacil.repositories.ImovelRepository;
 import com.example.alugafacil.alugafacil.repositories.InquilinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 
 @Service
@@ -17,6 +20,9 @@ public class DBService {
 
     @Autowired
     private InquilinoRepository inquilinoRepository;
+
+    @Autowired
+    private AluguelRepository aluguelRepository;
 
     public void instanciaDB(){
         Imovel imovel1 = new Imovel(
@@ -89,5 +95,60 @@ public class DBService {
 
         inquilinoRepository.saveAll(Arrays.asList(inquilino1,inquilino2,inquilino3,inquilino4,inquilino5,inquilino6));
 
+        // Aluguel 1
+        Aluguel aluguel1 = new Aluguel(
+                        null, // id = null
+                inquilino1,
+                imovel1,
+                        LocalDate.parse("2025-10-01"),
+                        1500.00
+                );
+
+        // Aluguel 2
+        Aluguel aluguel2 = new Aluguel(
+                        null, // id = null
+                inquilino2,
+                imovel2,
+                        LocalDate.parse("2025-10-05"),
+                        2000.00
+                );
+
+        // Aluguel 3
+        Aluguel aluguel3 = new Aluguel(
+                        null, // id = null
+                inquilino3,
+                imovel3,
+                        LocalDate.parse("2025-10-10"),
+                        1200.00
+                );
+
+        // Aluguel 4
+        Aluguel aluguel4 = new Aluguel(
+                        null, // id = null
+                inquilino4,
+                imovel4,
+                        LocalDate.parse("2025-10-05"),
+                        1800.00
+                );
+
+        // Aluguel 5
+        Aluguel aluguel5 = new Aluguel(
+                        null, // id = null
+                inquilino5,
+                imovel5,
+                        LocalDate.parse("2025-10-20"),
+                        1000.00
+                );
+
+        // Aluguel 6
+        Aluguel aluguel6 = new Aluguel(
+                        null, // id = null
+                inquilino6,
+                imovel1,
+                        LocalDate.parse("2025-09-30"),
+                        1500.00
+                );
+
+        aluguelRepository.saveAll(Arrays.asList(aluguel1, aluguel2, aluguel3, aluguel4, aluguel5, aluguel6));
     }
 }

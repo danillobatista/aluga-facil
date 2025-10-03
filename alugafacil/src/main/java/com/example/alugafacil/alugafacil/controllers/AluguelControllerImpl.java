@@ -14,6 +14,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,5 +60,23 @@ public class AluguelControllerImpl implements AluguelController {
     public ResponseEntity<Void> pay(@PathVariable Long id) {
         aluguelService.pagar(id);
         return ResponseEntity.ok().build();
+    }
+
+    @Override
+    @GetMapping("/atrasados")
+    public ResponseEntity<List<AluguelDto>> late() {
+        List<Aluguel> alugueisAtrasados = aluguelService.findLate();
+
+        List<AluguelDto> listaAlugueisAtrasadosDto = new ArrayList<>();
+
+        for (Aluguel aluguel : alugueisAtrasados) {
+            AluguelDto aluguelDto = modelMapper.map(aluguel, AluguelDto.class);
+            aluguelDto.setDiasEmAtraso(aluguel.getDataVencimento().until(LocalDate.now()).getDays());
+            listaAlugueisAtrasadosDto.add(aluguelDto);
+        }
+
+        return ResponseEntity
+                .ok()
+                .body(listaAlugueisAtrasadosDto);
     }
 }

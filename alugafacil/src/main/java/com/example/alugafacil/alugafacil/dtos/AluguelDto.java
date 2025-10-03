@@ -28,6 +28,16 @@ public class AluguelDto {
     private String inquilinoNome;
     private String imovelEndereco;
 
+    private int diasEmAtraso;
+
+    public int getDiasEmAtraso() {
+        return diasEmAtraso;
+    }
+
+    public void setDiasEmAtraso(int diasEmAtraso) {
+        this.diasEmAtraso = diasEmAtraso;
+    }
+
     public AluguelDto() {
     }
 

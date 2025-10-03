@@ -6,7 +6,9 @@ import com.example.alugafacil.alugafacil.repositories.AluguelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AluguelService {
@@ -33,5 +35,11 @@ public class AluguelService {
 
         aluguel.setPago();
         aluguelRepository.save(aluguel);
+    }
+
+    public List<Aluguel> findLate() {
+        return aluguelRepository.findAll().stream()
+                .filter(aluguel -> aluguel.getDataVencimento().isBefore(LocalDate.now()))
+                .collect(Collectors.toList());
     }
 }
