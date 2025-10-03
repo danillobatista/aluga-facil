@@ -36,7 +36,7 @@ public class GlobalException {
                 e.getMessage(),
                 request.getRequestURI());
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(se);
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(se);
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)

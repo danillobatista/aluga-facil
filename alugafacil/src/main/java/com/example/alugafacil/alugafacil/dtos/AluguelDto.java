@@ -10,18 +10,15 @@ public class AluguelDto {
 
     private Long id;
 
-    @NotNull(message = "O campo INQUILINO é obrigatório")
     private Long inquilinoId;
 
     @NotNull(message = "O campo IMÓVEL é obrigatório")
     private Long imovelId;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private @NotNull(message = "O campo DATA DE VENCIMENTO é obrigatório")
     LocalDate dataVencimento;
 
     @NotNull(message = "O campo VALOR é obrigatório")
-    @Min(value = 0, message = "O VALOR deve ser maior ou igual a zero")
     private Double valor;
 
     // Para facilitar a exibição
