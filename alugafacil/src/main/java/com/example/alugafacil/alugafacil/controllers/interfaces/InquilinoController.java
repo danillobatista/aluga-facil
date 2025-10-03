@@ -7,6 +7,5 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface InquilinoController {
-    public ResponseEntity<List<InquilinoDto>> findAll();
     public ResponseEntity<InquilinoDto> save(InquilinoDto inquilinoDto);
 }

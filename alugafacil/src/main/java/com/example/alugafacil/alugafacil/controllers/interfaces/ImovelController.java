@@ -7,7 +7,5 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface ImovelController {
-    public ResponseEntity<List<ImovelDto>> findAll();
     public ResponseEntity<ImovelDto> save(ImovelDto imovelDto);
-//    public ResponseEntity<ImovelDto> save(ImovelDto imovelDto);
 }

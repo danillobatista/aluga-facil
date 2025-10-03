@@ -1,17 +1,26 @@
 package com.example.alugafacil.alugafacil.dtos;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+@Schema(description = "DTO para operações de inquilino")
 public class InquilinoDto {
 
+    @Schema(description = "ID do inquilino", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
+    @Schema(description = "Nome completo do inquilino", required = true, 
+             example = "João da Silva")
     @NotNull(message = "o campo NOME é obrigatório")
     @Length(min = 10, max = 200, message = "o campo NOME deve ter entre 10 e 200 caracteres")
     private String nome;
 
+    @Schema(description = "E-mail de contato do inquilino", 
+            example = "joao.silva@example.com")
+    @Email(message = "Formato de e-mail inválido")
     private String email;
 
     public InquilinoDto() {

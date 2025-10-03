@@ -4,8 +4,13 @@ import com.example.alugafacil.alugafacil.controllers.interfaces.ImovelController
 import com.example.alugafacil.alugafacil.dtos.ImovelDto;
 import com.example.alugafacil.alugafacil.models.Imovel;
 import com.example.alugafacil.alugafacil.services.ImovelService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -16,7 +21,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/imoveis")
+@RequestMapping(value = "/imoveis", produces = MediaType.APPLICATION_JSON_VALUE)
+@Tag(name = "Imóveis", description = "API para gerenciamento de imóveis")
 public class ImovelControllerImpl implements ImovelController {
 
     @Autowired
@@ -26,18 +32,13 @@ public class ImovelControllerImpl implements ImovelController {
     private ModelMapper modelMapper;
 
     @Override
-    @GetMapping
-    public ResponseEntity<List<ImovelDto>> findAll() {
-        List<Imovel> imoveis = imovelService.findAll();
-
-        return ResponseEntity
-                .ok()
-                .body(imoveis.stream().map(obj -> modelMapper.map(obj, ImovelDto.class)).collect(Collectors.toList()));
-    }
-
-    @Override
-    @PostMapping
-    public ResponseEntity<ImovelDto> save(@Valid @RequestBody ImovelDto imovelDto){
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Cadastrar um novo imóvel", description = "Cria um novo registro de imóvel no sistema")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Imóvel cadastrado com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos")
+    })
+    public ResponseEntity<ImovelDto> save(@Valid @RequestBody ImovelDto imovelDto) {
         Imovel imovel = imovelService.save(modelMapper.map(imovelDto, Imovel.class));
 
         URI location = ServletUriComponentsBuilder
